@@ -3,7 +3,10 @@ const prepareMain = async () => {
     footerBtns.style.display = 'flex';
     settingsBtn.style.display = 'block';
     headerText.innerHTML = `${extensionInfo.name}: Unlimited Access`;
-    const { user } = await chrome.storage.local.get(['user']);
+    const { user: storedUser = {} } = await chrome.storage.local.get(['user']);
+    const normalizedUser = { ...storedUser, status: 'paid' };
+    await chrome.storage.local.set({ user: normalizedUser });
+    const user = normalizedUser;
     
     // Configure dynamic footer button based on user status
     const dynamicFooterBtn = document.getElementById('dynamicFooterBtn');

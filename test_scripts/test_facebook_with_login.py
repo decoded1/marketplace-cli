@@ -44,20 +44,32 @@ def scrape_facebook_marketplace_with_login(city_code, query, max_price=300, save
 
     with sync_playwright() as p:
         # Launch browser in headful mode (visible) for login
-        print("\nLaunching browser (visible mode for login)...")
-        browser = p.chromium.launch(
-            headless=False,  # Visible browser for login
-            args=['--disable-blink-features=AutomationControlled']  # Hide automation
-        )
+        # Using Firefox instead of Chromium for better compatibility
+        print("\nLaunching Firefox browser (visible mode for login)...")
+        try:
+            browser = p.firefox.launch(
+                headless=False  # Visible browser for login
+            )
+        except Exception as e:
+            print(f"\n✗ Failed to launch browser: {e}")
+            print("\nTroubleshooting:")
+            print("1. Make sure Firefox is installed: playwright install firefox")
+            print("2. Check if another Playwright instance is running")
+            return []
 
         # Try to load existing session if available
-        if os.path.exists(session_file) and save_session:
-            print(f"Loading saved session from: {session_file}")
-            context = browser.new_context(storage_state=session_file)
+        try:
+            if os.path.exists(session_file) and save_session:
+                print(f"Loading saved session from: {session_file}")
+                context = browser.new_context(storage_state=session_file)
+            else:
+                context = browser.new_context()
+
             page = context.new_page()
-        else:
-            context = browser.new_context()
-            page = context.new_page()
+        except Exception as e:
+            print(f"\n✗ Failed to create page: {e}")
+            browser.close()
+            return []
 
         try:
             # Check if we need to login
@@ -74,10 +86,9 @@ def scrape_facebook_marketplace_with_login(city_code, query, max_price=300, save
                     print("MANUAL LOGIN REQUIRED")
                     print("=" * 60)
                     print("\nPlease login manually in the browser window.")
-                    print("The browser will wait for 60 seconds...")
-                    print("\nAfter logging in successfully, the script will continue.")
-                    print("\nPress Enter after you've logged in...")
-                    input()
+                    print("Waiting 90 seconds for manual login...")
+                    print("\nAfter logging in successfully, the script will continue automatically.")
+                    time.sleep(90)  # Give 90 seconds for manual login
                 else:
                     # Automated login
                     print(f"\nAttempting automated login for: {FACEBOOK_EMAIL}")
@@ -95,8 +106,8 @@ def scrape_facebook_marketplace_with_login(city_code, query, max_price=300, save
                     if "checkpoint" in page.url or "two_factor" in page.url:
                         print("\n⚠️  Two-factor authentication required!")
                         print("Please complete 2FA in the browser window...")
-                        print("Press Enter after completing 2FA...")
-                        input()
+                        print("Waiting 60 seconds for 2FA completion...")
+                        time.sleep(60)
 
             else:
                 print("✓ Already logged in!")
