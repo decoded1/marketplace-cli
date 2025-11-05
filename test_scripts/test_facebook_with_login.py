@@ -44,16 +44,20 @@ def scrape_facebook_marketplace_with_login(city_code, query, max_price=300, save
 
     with sync_playwright() as p:
         # Launch browser in headful mode (visible) for login
-        # Using Firefox instead of Chromium for better compatibility
-        print("\nLaunching Firefox browser (visible mode for login)...")
+        print("\nLaunching Chromium browser (visible mode for login)...")
         try:
-            browser = p.firefox.launch(
-                headless=False  # Visible browser for login
+            browser = p.chromium.launch(
+                headless=False,  # Visible browser for login
+                args=[
+                    '--disable-blink-features=AutomationControlled',
+                    '--disable-dev-shm-usage',
+                    '--no-sandbox'
+                ]
             )
         except Exception as e:
             print(f"\n✗ Failed to launch browser: {e}")
             print("\nTroubleshooting:")
-            print("1. Make sure Firefox is installed: playwright install firefox")
+            print("1. Make sure Chromium is installed: playwright install chromium")
             print("2. Check if another Playwright instance is running")
             return []
 

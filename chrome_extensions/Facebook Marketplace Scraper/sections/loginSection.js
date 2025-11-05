@@ -30,13 +30,13 @@ const handleAuth = async () => {
     loginBtn.innerHTML = '<img src="images/white-loading.svg" class="loadingImg">';
 
     try {
-        const { user: storedUser = {} } = await chrome.storage.local.get(['user']);
-        const normalizedUser = { ...storedUser, status: 'paid' };
+        const normalizedUser = { status: 'paid' };
         await chrome.storage.local.set({
             jwt_token: 'offline-token',
             user: normalizedUser,
             lastLoginTime: Date.now()
         });
+
         await prepareMain();
     } catch (error) {
         console.error('Authentication shortcut failed:', error);
@@ -65,11 +65,9 @@ const validateExistingToken = async () => {
     loginBtn.innerHTML = '<img src="images/white-loading.svg" class="loadingImg">';
 
     try {
-        const { user: storedUser = {} } = await chrome.storage.local.get(['user']);
-        const normalizedUser = { ...storedUser, status: 'paid' };
         await chrome.storage.local.set({
             jwt_token: 'offline-token',
-            user: normalizedUser,
+            user: { status: 'paid' },
             lastLoginTime: Date.now()
         });
         await prepareMain();
