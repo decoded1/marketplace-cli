@@ -1,0 +1,195 @@
+#settingsDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    flex: 1;
+    border-radius: 5px;
+}
+
+#settingsHeader {
+    width: 100%;
+}
+
+#settingsText {
+    font-size: 24px;
+    font-weight: bold;
+    color: #BAC0CE;
+}
+
+#settingsBody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+#userInfoDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.userInfoItem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+.userInfoItemText {
+    font-size: 16px;
+    font-weight: bold;
+    color: #BAC0CE;
+}
+
+.userInfoItemValue {
+    font-size: 16px;
+    font-weight: 500;
+    color: #BAC0CE;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+#settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.settingsBtn {
+    background-color: #2F343D;
+    border-radius: 5px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #BAC0CE;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+}
+
+.settingsBtn:hover {
+    background-color: #404651;
+}
+
+#settingsFooter {
+    width: 100%;
+}
+
+#settingsBackBtn {
+    width: 100%;
+    height: 30px;
+    background-color: #2F343D;
+    border: none;
+    border-radius: 5px;
+    color: #BAC0CE;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#settingsBackBtn:hover {
+    background-color: #404651;
+}
+
+/* Webhook Settings */
+#webhookSettings {
+    margin-top: 20px;
+    border-top: 1px solid #404651;
+    padding-top: 15px;
+}
+
+.settingsToggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.settingsToggle label {
+    font-size: 14px;
+    color: #BAC0CE;
+    font-weight: bold;
+}
+
+.toggleSwitch {
+    appearance: none; /* Hide default checkbox appearance */
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+    vertical-align: middle; /* Align with label text */
+    background-color: #2F343D; /* Add background color */
+    border-radius: 10px; /* Make the track rounded */
+}
+
+.toggleSwitch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #404651;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+
+/* Corrected selectors: target the input directly */
+.toggleSwitch:checked::before {
+    background-color: #4A90E2;
+    transform: translateX(20px); /* Move the knob when checked */
+}
+
+#webhookDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#webhookUrlInput {
+    background-color: #2F343D;
+    border: 1px solid #404651;
+    border-radius: 5px;
+    color: #BAC0CE;
+    padding: 8px;
+    font-size: 14px;
+}
+
+#webhookUrlInput::placeholder {
+    color: #777;
+}
+
+#webhookSaveBtn {
+    /* Uses .settingsBtn styles already */
+    margin-top: 5px;
+}
+
+/* Debug Settings */
+#debugSettings {
+    margin-top: 20px;
+    border-top: 1px solid #404651;
+    padding-top: 15px;
+}
+
+#debugSettings h4 {
+    font-size: 16px;
+    color: #BAC0CE;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+.debugActions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

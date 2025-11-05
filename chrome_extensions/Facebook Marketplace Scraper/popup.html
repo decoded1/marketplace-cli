@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles/shared.css">
+    <link rel="stylesheet" type="text/css" href="styles/header.css">
+    <link rel="stylesheet" type="text/css" href="styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/login.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/reload.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/scrape.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/guide.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/final.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/details.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/fields.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/export.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/payment.css">
+    <link rel="stylesheet" type="text/css" href="styles/sections/settings.css">
+</head>
+
+<body>
+    <div id="main">
+        <div id="header" class="unlimited">
+            <span id="headerText"></span>
+            <button id="settingsBtn" style="display: none;"><img src="images/settings.svg" alt="Settings"></button>
+        </div>
+        <div id="body">
+            <div id="settingsSection" class="section" style="display: none;">
+                <div id="settingsDiv">
+                    <div id="settingsHeader">
+                        <span id="settingsText">Settings</span>
+                    </div>
+                    <div id="settingsBody">
+                        <div id="userInfoDiv">
+                            <div id="userInfoBody">
+                                <div class="userInfoItem">
+                                    <span class="userInfoItemText">Email:</span>
+                                    <span class="userInfoItemValue"></span>
+                                </div>
+                                <div class="userInfoItem">
+                                    <span class="userInfoItemText">Plan:</span>
+                                    <span class="userInfoItemValue"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="settings">
+                            <button class="settingsBtn" id="membershipBtn">Manage Membership</button>
+                            <button class="settingsBtn" id="upgradeBtn">Upgrade</button>
+                            <button class="settingsBtn" id="logoutBtn">Logout</button>
+                        </div>
+                        <div id="webhookSettings">
+                            <div class="settingsToggle" style="margin-bottom: 10px;">
+                                <label for="webhookToggle">Enable Webhook Export</label>
+                                <input type="checkbox" id="webhookToggle" class="toggleSwitch">
+                            </div>
+                            <div id="webhookDetails" style="display: none;">
+                                <input type="url" id="webhookUrlInput" placeholder="Enter Webhook URL">
+                                <button id="webhookSaveBtn" class="settingsBtn">Save Webhook URL</button>
+                            </div>
+                        </div>
+                        <div class="settingsToggle">
+                            <label for="keepDataToggle">Keep Export List After Exporting</label>
+                            <input type="checkbox" id="keepDataToggle" class="toggleSwitch">
+                        </div>
+                        <div id="debugSettings">
+                            <h4>Debug Options</h4>
+                            <div class="debugActions">
+                                <button class="settingsBtn" id="downloadDebugBtn">Download Debug Log</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="settingsFooter">
+                        <button id="settingsBackBtn">Back</button>
+                    </div>
+                </div>
+            </div>
+            <div id="reloadSection" class="section" style="display: none;">
+                <div class="reloadMessage">Please reload the page to use the extension</div>
+                <button id="reloadBtn">Reload Page</button>
+            </div>
+            <div id="loginSection" class="section">
+                <div id="loginForm">
+                    <span id="loginText">Login</span>
+                    <div id="loginInputs">
+                        <input type="email" id="emailInput" placeholder="Email">
+                        <input type="password" id="passwordInput" placeholder="Password">
+                    </div>
+                    <button id="loginBtn">Login</button>
+                    <div id="bottomBtns">
+                        <div id="switchAuthText">
+                            Don't have an account? <span id="switchAuthBtn">Sign up</span>
+                        </div>
+                        <div id="forgotPasswordText">
+                            Forgot password? <a id="forgotPasswordBtn" href="" target="_blank">Reset password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="scrapeSection" class="section" style="display: none;">
+            </div>
+            <div id="guideSection" class="section" style="display: none;">
+                <div id="guideDiv">
+                    <div id="guideContent">
+
+                    </div>
+                    <button id="guideBackBtn">Back</button>
+                </div>
+            </div>
+            <div id="paymentSection" class="section" style="display: none;">
+                <div id="paymentDiv">
+                    <div id="paymentHeader">
+                        <span id="paymentText">Premium</span>
+                        <span id="paymentPrice">$9.99/m</span>
+                    </div>
+                    <div id="paymentBody">
+                        <div id="paymentFeatures">
+                            <div class="paymentFeature">&#8226; Unlimited Rows Per Export</div>
+                            <div class="paymentFeature">&#8226; Unlimited Exports Per Day</div>
+                            <div class="paymentFeature">&#8226; Customizable Fields</div>
+                            <div class="paymentFeature">&#8226; XLSX, XML, and TXT Export</div>
+                            <div class="paymentFeature">&#8226; Up to 3 Devices Per Account</div>
+                        </div>
+                    </div>
+                    <div id="paymentFooter">
+                        <button id="paymentBtn">Subscribe</button>
+                    </div>
+                    <button id="paymentBackBtn">Back</button>
+                </div>
+            </div>
+            <div id="finalSection" class="section" style="display: none;">
+                <div id="finalDiv">
+                    <div id="actionBtns">
+                        <div class="actionBtnDiv">
+                            <button class="actionBtn" id="customizeFieldsBtn">Customize Fields</button>
+                        </div>
+                        <div class="actionBtnDiv" id="exportBtnDiv">
+                            <button class="actionBtn" id="exportBtn">Export</button>
+                        </div>
+                    </div>
+                    <div id="rowsDiv">
+                        <div id="rowsDivHeader">
+                            <input type="text" id="searchInput" placeholder="Search">
+                        </div>
+                        <div id="rowsDivBody">
+                        </div>
+                        <div id="cancelDiv">
+                            <button id="cancelBtn">Clear Export List</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="detailSection" class="section" style="display: none;">
+                <div id="detailDiv">
+                    <div id="detailsHeader">
+                        <span id="detailsText"></span>
+                    </div>
+                    <div id="detailsBody">
+                    </div>
+                    <div id="detailsFooter">
+                        <button id="detailsBackBtn">Back</button>
+                    </div>
+                </div>
+            </div>
+            <div id="fieldSection" class="section" style="display: none;">
+                <div id="fieldDiv">
+                    <div id="fieldsHeader">
+                        <span id="fieldsText">Fields</span>
+                    </div>
+                    <div id="fields">
+                        <!-- Fields will be dynamically added here -->
+                        <!-- Example structure (will be generated by JS):
+                        <div class="field" draggable="true">
+                            <input type="checkbox" class="fieldCheckbox" id="field-example">
+                            <label class="fieldName" for="field-example">
+                                <span class="field-name-text">Example Field</span>
+                                <button class="rename-btn" style="display: none;"><img src="images/pen.svg" alt="Rename"></button>
+                            </label>
+                        </div>
+                         -->
+                    </div>
+                    <div id="fieldFooter">
+                        <div id="fieldFooterTop">
+                            <button id="fieldSaveBtn" class="fieldActionBtn">Save</button>
+                            <button id="fieldResetBtn" class="fieldActionBtn">Reset to Defaults</button>
+                        </div>
+                        <div id="fieldFooterBottom">
+                            <button id="fieldBackBtn" class="fieldActionBtn">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="exportSection" class="section" style="display: none;">
+                <div id="exportDiv">
+                    <div id="exportHeader">
+                        <span id="exportText">Export Data</span>
+                        <div id="exportLimitInfo" style="display: none;"></div>
+                    </div>
+                    <div id="exportBody">
+                        <div class="exportOption">
+                            <button class="exportBtn" id="exportHTMLBtn">Export as HTML</button>
+                        </div>
+                        <div class="exportOption">
+                            <button class="exportBtn" id="exportCSVBtn">Export as CSV</button>
+                        </div>
+                        <div class="exportOption">
+                            <button class="exportBtn" id="exportJSONBtn">Export as JSON</button>
+                        </div>
+                        <div class="exportOption">
+                            <button class="exportBtn" id="exportRAWJSONBtn">Export as RAW JSON</button>
+                        </div>
+                        <div class="exportOption">
+                            <button class="exportBtn" id="exportXLSXBtn">Export as XSLX</button>
+                        </div>
+                        <div class="exportOption">
+                            <button class="exportBtn" id="exportXMLBtn">Export as XML</button>
+                        </div>
+                        <div class="exportOption">
+                            <button class="exportBtn" id="exportTXTBtn">Export as TXT</button>
+                        </div>
+                        <div id="webhookToggleContainer" style="display: none;">
+                            <div class="settingsToggle exportWebhookToggle">
+                                <label for="exportWebhookToggle">Use Webhook for Export</label>
+                                <input type="checkbox" id="exportWebhookToggle" class="toggleSwitch">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="freeLimitDiv" style="display: none;">
+                        <span id="freeLimitText">Limited to 25 free rows per export</span>
+                    </div>
+                    <div id="exportFooter">
+                        <button id="exportBackBtn">Back</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Free Trial Popup -->
+            <div id="freeTrialPopup" class="popup-overlay" style="display: none;">
+                <div class="popup-content">
+                    <h3>Unlock Premium Features</h3>
+                    <p>Try unlimited exports and premium features free for 3 hours. No credit card required.</p>
+                    <div class="popup-buttons">
+                        <button id="startFreeTrialBtn">Start Free Trial</button>
+                        <button id="skipFreeTrialBtn">Skip</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Popup -->
+            <div id="reviewPopup" class="popup-overlay" style="display: none;">
+                <div class="popup-content">
+                    <h3>Enjoying the Extension?</h3>
+                    <p>Your review helps others discover this tool. Share your experience!</p>
+                    <div class="popup-buttons">
+                        <button id="rateExtensionBtn">Write a Review</button>
+                        <button id="skipReviewBtn">Skip</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div id="footerBtns">
+                <button id="dynamicFooterBtn" class="footerBtn">Check our other extensions</button>
+                <a id="contactUsBtn" class="footerBtn" target="_blank">Contact Us</a>
+            </div>
+            <div id="brandingDiv">
+                <span id="brandingText"></span>
+            </div>
+        </div>
+    </div>
+    <script src="config.js"></script>
+
+    <script src="sections/shared.js"></script>
+    <script src="sections/reloadSection.js"></script>
+    <script src="sections/loginSection.js"></script>
+    <script src="sections/scrapeSection.js"></script>
+    <script src="sections/guideSection.js"></script>
+    <script src="sections/finalSection.js"></script>
+    <script src="sections/detailsSection.js"></script>
+    <script src="sections/fieldSection.js"></script>
+    <script src="sections/exportSection.js"></script>
+    <script src="sections/paymentSection.js"></script>
+    <script src="sections/settingsSection.js"></script>
+    <script src="sections/freeUsers.js"></script>
+    <script src="sections/popupManager.js"></script>
+
+    <script src="popup.js"></script>
+    <script src="Sortable.min.js"></script>
+</body>
+
+</html>

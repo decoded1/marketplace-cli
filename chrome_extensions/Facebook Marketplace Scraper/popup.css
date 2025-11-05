@@ -1,0 +1,922 @@
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #222830;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2b3239;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+#main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 400px;
+    height: 600px;
+    overflow: hidden;
+}
+#header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    width: 90%;
+    margin-top: 10px;
+}
+#logoDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+#logoImg{
+    width: 25px;
+    height: 25px;
+}
+#logoText{
+    font-size: 16px;
+    font-weight: bold;
+}
+#promotionDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF9F9;
+    border: 1px solid #FF0000;
+    border-radius: 5px;
+    flex: 1;
+    height: 25px;
+    cursor: pointer;
+}
+#promotionImg{
+    width: 12px;
+    height: 12px;
+}
+#promotionText{
+    font-size: 12px;
+    font-weight: bold;
+    color: #FF0000;
+}
+#settingsBtn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+#settingsBtn img{
+    width: 25px;
+    height: 25px;
+}
+.paidDiv{
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    background-color: #FFC1C1;
+    border-radius: 5px;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.paidDiv img{
+    width: 15px;
+    height: 15px;
+}
+
+#body{
+    flex: 1;
+    width: 90%;
+}
+#footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+#footerBtns{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 90%;
+}
+.footerBtn{
+    flex: 1;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    color: #222830;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 0 10px;
+    transition: background-color 0.2s ease;
+}
+.footerBtn:hover {
+    background-color: #c0c0c0;
+}
+#brandingDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    border-top: 1px solid #222830;
+}
+#brandingText{
+    font-size: 12px;
+}
+#brandingText a{
+    color: #222830;
+    text-decoration: none;
+}
+
+#loginBtn {
+    width: 100%;
+    padding: 10px;
+    background-color: #222830;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    height: 50px;
+    transition: background-color 0.2s ease;
+}
+#loginBtn:hover {
+    background-color: #2b3239;
+}
+
+#logoutBtn {
+    padding: 5px 10px;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#logoutBtn:hover {
+    background-color: #c0c0c0;
+}
+.section{
+    height: 100%;
+}
+#scrapeSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 450px;
+    overflow-y: auto;
+    gap: 10px;
+}
+.scrapeDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+.scrapeDiv.unavailable{
+    opacity: 0.5;
+}
+.scrapeBtn{
+    display: block;
+    flex: 1;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    color: #222830;
+    font-size: 22px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.scrapeBtn:hover {
+    background-color: #c0c0c0;
+}
+.guideBtn{
+    height: 60px;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    color: #222830;
+    width: 40px;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.guideBtn:hover {
+    background-color: #c0c0c0;
+}
+#guideDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.guideQuestion{
+    font-size: 20px;
+    font-weight: bold;
+    color: #222830;
+    margin-bottom: 10px;
+}
+.guideText{
+    font-size: 16px;
+    font-weight: 500;
+    color: #222830;
+}
+#guideBackBtn{
+    margin-top: 10px;
+    width: 100%;
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+#guideBackBtn:hover {
+    background-color: #e5e5e5;
+}
+#reloadSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.reloadMessage {
+    font-size: 16px;
+    text-align: center;
+    color: #222830;
+    font-weight: 500;
+}
+
+#reloadBtn {
+    padding: 10px 20px;
+    background-color: #222830;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#reloadBtn:hover {
+    background-color: #2b3239;
+}
+
+#finalDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+#actionBtns{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+.actionBtnDiv{
+    flex: 1;
+    position: relative;
+}
+.actionBtn{
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    height: 35px;
+    width: 100%;
+    border: none;
+    color: #222830;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.actionBtn:hover:not(.paid) {
+    background-color: #c0c0c0;
+}
+.actionBtn.paid{
+    opacity: 0.5;
+}
+#exportBtnDiv{
+    max-width: 125px;
+}
+#rowsDiv{
+    background-color: #F4F4F4;
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+#rowsDivHeader{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+
+}
+#rowsDivBody{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    max-height: 295px;
+    overflow-y: auto;
+}
+#selectBtn{
+    padding: 0 10px;
+    height: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#selectBtn:hover {
+    background-color: #c0c0c0;
+}
+#searchInput{
+    flex: 1;
+    height: 25px;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.rowDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+    height: 35px;
+    min-height: 35px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+}
+.rowCheckbox{
+    width: 15px;
+    height: 15px;
+
+}
+
+.rowText{
+    font-size: 12px;
+    font-weight: bold;
+    color: #222830;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.rowBtn{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+#cancelDiv{
+    width: 100%;
+}
+#cancelBtn{
+    width: 100%;
+    height: 30px;
+    background-color: #FF5A5A;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#cancelBtn:hover {
+    background-color: #ff4040;
+}
+
+#detailDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+#detailsHeader{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+}
+#detailsCheckbox{
+    width: 20px;
+    height: 20px;
+}
+#detailsText{
+    font-size: 18px;
+    font-weight: bold;
+    color: #222830;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#detailsBtn{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+#detailsBody{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    flex: 1;
+    max-height: 320px;
+    overflow-y: auto;
+}
+.detailDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.detailField{
+    font-size: 12px;
+    font-weight: bold;
+    color: #222830;
+    background-color: #d9d9d9;
+    display: block;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.detailValue{
+    flex: 1;
+    font-size: 12px;
+    color: #222830;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#detailsFooter{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+#detailsBackBtn{
+    width: 100%;
+    height: 35px;
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 5px;
+    color: #222830;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#detailsBackBtn:hover {
+    background-color: #e5e5e5;
+}
+#fieldDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+#fields{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    max-height: 340px;
+    overflow-y: auto;
+}
+#fieldsHeader{
+    width: 100%;
+}
+#fieldsText{
+    font-size: 18px;
+    font-weight: bold;
+    color: #222830;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.field{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+.fieldCheckbox{
+    width: 15px;
+    height: 15px;
+}
+.fieldName{
+    font-size: 16px;
+    font-weight: 500;
+    color: #222830;
+}
+#fieldFooter{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+#fieldSaveBtn{
+    width: 100%;
+    height: 35px;
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 5px;
+    color: #222830;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#fieldSaveBtn:hover {
+    background-color: #e5e5e5;
+}
+#exportDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+#exportHeader{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+#exportLimitInfo {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+#exportText{
+    font-size: 18px;
+    font-weight: bold;
+    color: #222830;
+}
+#exportBody{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+.exportOption{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    position: relative;
+}
+.exportBtn{
+    flex: 1;
+    height: 40px;
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 5px;
+    color: #222830;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.exportBtn:hover:not(.paid) {
+    background-color: #c0c0c0;
+}
+.exportBtn.paid{
+    opacity: 0.5;
+}
+
+.exportBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+#exportFooter{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+#exportBackBtn{
+    width: 100%;
+    height: 35px;
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 5px;
+    color: #222830;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#exportBackBtn:hover {
+    background-color: #e5e5e5;
+}
+#customSolutionDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
+    color: #222830;
+    cursor: pointer;
+    border: 1px solid #B5B5B5;
+}
+#customSolutionText{
+    font-size: 12px;
+    font-weight: 500;
+    color: #222830;
+}
+
+#paymentDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+#paymentHeader{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+#paymentText{
+    font-size: 32px;
+    font-weight: 900;
+    color: #222830;
+}
+#paymentPrice{
+    font-size: 24px;
+    font-weight: 900;
+    color: #222830;
+}
+#paymentBody{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#paymentFeatures{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    height: 200px;
+    overflow-y: auto;
+}
+.paymentFeature{
+    font-size: 18px;
+    font-weight: bold;
+    color: #222830;
+}
+#paymentFooter{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+#paymentBtn{
+    width: 100%;
+    height: 45px;
+    background-color: #ED4C4C;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#paymentBtn:hover {
+    background-color: #e04040;
+}
+#paymentBackBtn{
+    width: 100%;
+    height: 35px;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 5px;
+    color: #222830;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#paymentBackBtn:hover {
+    background-color: #c0c0c0;
+}
+#paymentDisclaimer{
+    font-size: 12px;
+    font-weight: 500;
+    color: #222830;
+    width: 100%;
+    text-align: center;
+}
+
+#settingsDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    flex: 1;
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+#settingsHeader{
+    width: 100%;
+}
+#settingsText{
+    font-size: 24px;
+    font-weight: bold;
+    color: #222830;
+}
+#settingsBody{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+#userInfoDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.userInfoItem{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+.userInfoItemText{
+    font-size: 16px;
+    font-weight: bold;
+    color: #222830;
+}
+.userInfoItemValue{
+    font-size: 16px;
+    font-weight: 500;
+    color: #222830;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+#settings{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.settingsBtn{
+    background-color: #d9d9d9;
+    border-radius: 5px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #222830;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+}
+.settingsBtn:hover {
+    background-color: #c0c0c0;
+}
+#logoutBtn{
+    background-color: #FF5A5A;
+    color: white;
+}
+#logoutBtn:hover {
+    background-color: #ff4040;
+}
+#settingsFooter{
+    width: 100%;
+}
+#settingsBackBtn{
+    width: 100%;
+    height: 35px;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 5px;
+    color: #222830;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#settingsBackBtn:hover {
+    background-color: #c0c0c0;
+}
+.loadingImg{
+    width: 25px;
+    height: 25px;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loadingImg {
+    animation: rotate 1.5s linear infinite;
+}
+

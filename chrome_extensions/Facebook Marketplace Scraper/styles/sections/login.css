@@ -1,0 +1,78 @@
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+#loginText {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    width: 100%;
+    color: #BAC0CE;
+}
+#loginInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+#emailInput, #passwordInput {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #2F343D;
+    color: #BAC0CE;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+}
+
+#loginBtn {
+    width: 100%;
+    padding: 10px;
+    background-color: #2F343D;
+    color: #BAC0CE;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    height: 40px;
+    transition: background-color 0.2s ease;
+}
+
+#loginBtn:hover {
+    background-color: #404651;
+}
+
+#bottomBtns {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    width: 100%;
+}
+
+#switchAuthText {
+    text-align: center;
+    margin-top: 10px;
+    color: #BAC0CE;
+}
+
+#switchAuthBtn {
+    color: #BAC0CE;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#forgotPasswordText {
+    text-align: center;
+    margin-top: 10px;
+    color: #BAC0CE;
+}
+
+#forgotPasswordBtn {
+    color: #BAC0CE;
+    cursor: pointer;
+    text-decoration: underline;
+}

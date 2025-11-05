@@ -1,0 +1,34 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "images/icon128.png",
+         "16": "images/icon16.png",
+         "48": "images/icon48.png"
+      },
+      "default_popup": "popup.html"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "content_scripts": [ {
+      "js": [ "config.js", "content/core.js", "content/popupManager.js", "content/automationManager.js" ],
+      "matches": [ "https://*.facebook.com/*" ],
+      "run_at": "document_start"
+   } ],
+   "description": "Scrape Listings, Sellers, and more from Facebook Marketplace, with options to export in formats such as CSV, Excel, JSON and others",
+   "icons": {
+      "128": "images/icon128.png",
+      "16": "images/icon16.png",
+      "48": "images/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApxjaRFXUHibx9SUOxUDgM7QTRjnNfqQP+QTdK+wNfpvkUufjUhLNE8BO4Sra0BOJMaQ8lyEqCaijBSqtTi+PFYcqxqFr2Vx4+bMAvfU1JL1nHLYM2xGvWXZ9BGsIFYq7kNUuMli+7gSccIcvnux1UR9PLlRtCt+mFEFnhUk/vQHyp6eUqYTNo/tB+Sn2f0X0GmO6gr4McBERymKlkfGa3mcS5g1zxlXsELBwyQbJPULYKwwiwt9mS33mOixkrCLHpJvo7gd5eADnq/scop43Kk5ISh1HqULwK/hYkFPocLid/HY/cFO/0xUn2Td9gOWcFLSxdF/4TbsOgem595UnUQIDAQAB",
+   "manifest_version": 3,
+   "name": "Facebook Marketplace Scraper: Export Search, Products, Sellers & more",
+   "permissions": [ "storage", "tabs", "downloads", "unlimitedStorage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.0.0",
+   "web_accessible_resources": [ {
+      "matches": [ "*://*.facebook.com/*" ],
+      "resources": [ "fetchOverride.js" ]
+   } ]
+}

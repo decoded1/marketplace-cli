@@ -1,0 +1,90 @@
+#paymentDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+#paymentHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+#paymentText {
+    font-size: 32px;
+    font-weight: 900;
+    color: #BAC0CE;
+}
+
+#paymentPrice {
+    font-size: 24px;
+    font-weight: 900;
+    color: #BAC0CE;
+}
+
+#paymentBody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+}
+
+#paymentFeatures {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    height: 200px;
+    overflow-y: auto;
+}
+
+.paymentFeature {
+    font-size: 18px;
+    font-weight: bold;
+    color: #BAC0CE;
+}
+
+#paymentFooter {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+#paymentBtn {
+    width: 100%;
+    height: 45px;
+    background-color: #2F343D;
+    border: none;
+    border-radius: 5px;
+    color: #BAC0CE;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#paymentBtn:hover {
+    background-color: #404651;
+}
+
+#paymentBackBtn {
+    width: 100%;
+    height: 30px;
+    min-height: 30px;
+    background-color: #2F343D;
+    border: none;
+    border-radius: 5px;
+    color: #BAC0CE;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#paymentBackBtn:hover {
+    background-color: #404651;
+}

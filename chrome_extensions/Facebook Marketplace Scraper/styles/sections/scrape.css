@@ -1,0 +1,88 @@
+#scrapeSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    overflow-y: auto;
+    gap: 10px;
+}
+
+.scrapeDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.scrapeDiv.unavailable {
+    opacity: 0.5;
+}
+
+.scrapeDiv.tutorialDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.scrapeDiv.tutorialDiv a{
+    text-decoration: none;
+    background-color: #2F343D;
+    color: #BAC0CE;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+.scrapeDiv.tutorialDiv a:hover{
+    background-color: #404651;
+}
+
+.scrapeBtn {
+    display: block;
+    flex: 1;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #2F343D;
+    color: #BAC0CE;
+    font-size: 22px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.scrapeBtn.maintenance {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.scrapeBtn:hover {
+    background-color: #404651;
+}
+
+.guideBtn {
+    height: 60px;
+    border-radius: 5px;
+    background-color: #2F343D;
+    color: #BAC0CE;
+    width: 40px;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.guideBtn:hover {
+    background-color: #404651;
+}
+
+

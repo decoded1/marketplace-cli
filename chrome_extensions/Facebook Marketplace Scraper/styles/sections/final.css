@@ -1,0 +1,158 @@
+#finalDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+#actionBtns {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.actionBtnDiv {
+    flex: 1;
+    position: relative;
+}
+
+.actionBtn {
+    background-color: #2F343D;
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    border: none;
+    color: #BAC0CE;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.actionBtn:hover:not(.paid) {
+    background-color: #404651;
+}
+
+.actionBtn.paid {
+    opacity: 0.5;
+}
+
+#exportBtnDiv {
+    max-width: 125px;
+}
+
+#rowsDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+}
+
+#rowsDivHeader {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+#rowsDivBody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+#selectBtn {
+    padding: 0 10px;
+    height: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #2F343D;
+    color: #BAC0CE;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#selectBtn:hover {
+    background-color: #404651;
+}
+
+#searchInput {
+    flex: 1;
+    height: 25px;
+    border-radius: 5px;
+    background-color: #2F343D;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+    color: #BAC0CE;
+    outline: none;
+}
+
+.rowDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+    height: 35px;
+    min-height: 35px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #2F343D;
+    cursor: pointer;
+}
+
+.rowDiv:hover {
+    background-color: #404651;
+}
+
+.rowCheckbox {
+    width: 15px;
+    height: 15px;
+    accent-color: #BAC0CE;
+}
+
+.rowText {
+    font-size: 12px;
+    font-weight: bold;
+    color: #BAC0CE;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#cancelDiv {
+    width: 100%;
+}
+
+#cancelBtn {
+    width: 100%;
+    height: 30px;
+    background-color: #2F343D;
+    border: none;
+    border-radius: 5px;
+    color: #BAC0CE;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#cancelBtn:hover {
+    background-color: #404651;
+}

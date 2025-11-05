@@ -1,0 +1,30 @@
+#header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    padding: 0 5%;
+    box-sizing: border-box;
+    height: 30px;
+    border-bottom: 1px solid #565c68;
+}
+
+#headerText {
+    font-size: 12px;
+    font-weight: bold;
+    color: #BAC0CE;
+    cursor: pointer;
+}
+
+#settingsBtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#settingsBtn img {
+    width: 15px;
+    height: 15px;
+}
