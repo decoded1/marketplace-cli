@@ -16,6 +16,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 ### clscrape
 - **URL**: https://github.com/jseconners/clscrape
 - **Last Updated**: December 2022
+- **Stars**: ⭐ 0
 - **Description**: Command line Craigslist scraper outputs JSON with structured listing data
 - [ ] Review functionality
 - [ ] Test reliability
@@ -26,6 +27,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 ### CraigslistScraper
 - **URL**: https://github.com/ryanirl/CraigslistScraper
 - **Last Updated**: June 2024
+- **Stars**: ⭐ 49
 - **Description**: Lightweight Python library for scraping Craigslist from terminal sessions
 - [ ] Review functionality
 - [ ] Test reliability
@@ -36,37 +38,8 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 ### SearchExpander
 - **URL**: https://github.com/Same-Writer/SearchExpander
 - **Last Updated**: July 2021
+- **Stars**: ⭐ 1
 - **Description**: Scrapes Craigslist across multiple cities with email notifications support
-- [ ] Review functionality
-- [ ] Test reliability
-- [ ] Check code quality
-- [ ] Verify documentation
-- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
-
-### craigslist_scraper
-- **URL**: https://github.com/ebtrader/craigslist_scraper
-- **Last Updated**: April 2020
-- **Description**: Scrapes Craigslist pages and ranks most common listings found
-- [ ] Review functionality
-- [ ] Test reliability
-- [ ] Check code quality
-- [ ] Verify documentation
-- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
-
-### craigslist-scraper
-- **URL**: https://github.com/tylernnguyen5/craigslist-scraper
-- **Last Updated**: July 2020
-- **Description**: Extracts job listings from Craigslist using Puppeteer and Cheerio
-- [ ] Review functionality
-- [ ] Test reliability
-- [ ] Check code quality
-- [ ] Verify documentation
-- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
-
-### cl_gig
-- **URL**: https://github.com/michaelrinderle/cl_gig
-- **Last Updated**: April 2016
-- **Description**: Scrapes Craigslist computer gigs and outputs to HTML file
 - [ ] Review functionality
 - [ ] Test reliability
 - [ ] Check code quality
@@ -76,17 +49,8 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 ### PyCraigslist
 - **URL**: https://github.com/irahorecka/pycraigslist
 - **Last Updated**: October 2025
+- **Stars**: ⭐ 52
 - **Description**: Python API wrapper for Craigslist with structured queries and filters (price, images, date, etc.)
-- [ ] Review functionality
-- [ ] Test reliability
-- [ ] Check code quality
-- [ ] Verify documentation
-- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
-
-### craigslist-scout
-- **URL**: https://github.com/briangonzalez/craigslist-scout
-- **Last Updated**: February 2016
-- **Description**: Node.js CLI to query multiple Craigslist cities concurrently with email notifications for new listings
 - [ ] Review functionality
 - [ ] Test reliability
 - [ ] Check code quality
@@ -107,19 +71,10 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 - [ ] Verify documentation
 - [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
 
-### offerup
-- **URL**: https://github.com/planetzero/offerup
-- **Last Updated**: December 2017
-- **Description**: Unofficial OfferUp API client for programmatic marketplace access
-- [ ] Review functionality
-- [ ] Test reliability
-- [ ] Check code quality
-- [ ] Verify documentation
-- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
-
 ### OfferupUnofficalAPI
 - **URL**: https://github.com/everettperiman/OfferupUnofficalAPI
 - **Last Updated**: February 2021
+- **Stars**: ⭐ 2
 - **Description**: Unofficial API for OfferUp ecommerce site marketplace operations
 - [ ] Review functionality
 - [ ] Test reliability
@@ -130,6 +85,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 ### pyOfferUp
 - **URL**: https://github.com/oscar0812/pyOfferUp
 - **Last Updated**: June 2023
+- **Stars**: ⭐ 18
 - **Description**: Python package to scrape OfferUp listings by keyword and location with detailed JSON output
 - [ ] Review functionality
 - [ ] Test reliability
@@ -154,6 +110,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 ### facebook-marketplace-scraper
 - **URL**: https://github.com/passivebot/facebook-marketplace-scraper
 - **Last Updated**: April 2024
+- **Stars**: ⭐ 352
 - **Description**: Scrapes Facebook Marketplace using Playwright BeautifulSoup and Streamlit
 - [ ] Review functionality
 - [ ] Test reliability
@@ -165,16 +122,6 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 - **URL**: https://apify.com/memo23/facebook-marketplace-cheerio
 - **Last Updated**: N/A (Apify platform)
 - **Description**: Fast Facebook Marketplace scraper using Cheerio for data extraction
-- [ ] Review functionality
-- [ ] Test reliability
-- [ ] Check code quality
-- [ ] Verify documentation
-- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
-
-### marketplace-scraper (jaridnft)
-- **URL**: https://github.com/jaridnft/marketplace-scraper
-- **Last Updated**: September 2019
-- **Description**: Node.js scraper to monitor Facebook Marketplace for specific products and price criteria
 - [ ] Review functionality
 - [ ] Test reliability
 - [ ] Check code quality
@@ -237,50 +184,13 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ---
 
-## Etsy Tools
-
-### Getsy (WWW::Getsy)
-- **URL**: https://github.com/jgoulah/WWW-Getsy
-- **Last Updated**: November 2015
-- **Description**: Perl command line interface to Etsy V2 OAuth API
-- [ ] Review functionality
-- [ ] Test reliability
-- [ ] Check code quality
-- [ ] Verify documentation
-- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
-
----
-
-## Kijiji Tools
-
-### Kijiji-Scraper
-- **URL**: https://github.com/CRutkowski/Kijiji-Scraper
-- **Last Updated**: May 2021
-- **Description**: Python CLI to track Kijiji search URLs and send email alerts for new listings (popular in Canada)
-- [ ] Review functionality
-- [ ] Test reliability
-- [ ] Check code quality
-- [ ] Verify documentation
-- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
-
----
-
 ## Multi-Platform Tools
 
 ### Deals-Scraper
 - **URL**: https://github.com/JustSxm/Deals-Scraper
 - **Last Updated**: April 2024
+- **Stars**: ⭐ 95
 - **Description**: Scrapes Facebook Marketplace Kijiji eBay Amazon and Lespacs deals
-- [ ] Review functionality
-- [ ] Test reliability
-- [ ] Check code quality
-- [ ] Verify documentation
-- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
-
-### marketplace-scraper
-- **URL**: https://github.com/johudsonRx/marketplace-scraper
-- **Last Updated**: December 2019
-- **Description**: Scrapes Craigslist and other marketplaces for targeted buying opportunities
 - [ ] Review functionality
 - [ ] Test reliability
 - [ ] Check code quality
