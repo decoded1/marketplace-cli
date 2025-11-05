@@ -73,6 +73,26 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 - [ ] Verify documentation
 - [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
 
+### PyCraigslist
+- **URL**: https://github.com/irahorecka/pycraigslist
+- **Last Updated**: October 2025
+- **Description**: Python API wrapper for Craigslist with structured queries and filters (price, images, date, etc.)
+- [ ] Review functionality
+- [ ] Test reliability
+- [ ] Check code quality
+- [ ] Verify documentation
+- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
+
+### craigslist-scout
+- **URL**: https://github.com/briangonzalez/craigslist-scout
+- **Last Updated**: February 2016
+- **Description**: Node.js CLI to query multiple Craigslist cities concurrently with email notifications for new listings
+- [ ] Review functionality
+- [ ] Test reliability
+- [ ] Check code quality
+- [ ] Verify documentation
+- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
+
 ---
 
 ## OfferUp Tools
@@ -107,6 +127,16 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 - [ ] Verify documentation
 - [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
 
+### pyOfferUp
+- **URL**: https://github.com/oscar0812/pyOfferUp
+- **Last Updated**: June 2023
+- **Description**: Python package to scrape OfferUp listings by keyword and location with detailed JSON output
+- [ ] Review functionality
+- [ ] Test reliability
+- [ ] Check code quality
+- [ ] Verify documentation
+- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
+
 ---
 
 ## Facebook Marketplace Tools
@@ -135,6 +165,16 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 - **URL**: https://apify.com/memo23/facebook-marketplace-cheerio
 - **Last Updated**: N/A (Apify platform)
 - **Description**: Fast Facebook Marketplace scraper using Cheerio for data extraction
+- [ ] Review functionality
+- [ ] Test reliability
+- [ ] Check code quality
+- [ ] Verify documentation
+- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
+
+### marketplace-scraper (jaridnft)
+- **URL**: https://github.com/jaridnft/marketplace-scraper
+- **Last Updated**: September 2019
+- **Description**: Node.js scraper to monitor Facebook Marketplace for specific products and price criteria
 - [ ] Review functionality
 - [ ] Test reliability
 - [ ] Check code quality
@@ -203,6 +243,20 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 - **URL**: https://github.com/jgoulah/WWW-Getsy
 - **Last Updated**: November 2015
 - **Description**: Perl command line interface to Etsy V2 OAuth API
+- [ ] Review functionality
+- [ ] Test reliability
+- [ ] Check code quality
+- [ ] Verify documentation
+- [ ] **Decision**: ⬜ Include / ⬜ Exclude / ⬜ Needs Work
+
+---
+
+## Kijiji Tools
+
+### Kijiji-Scraper
+- **URL**: https://github.com/CRutkowski/Kijiji-Scraper
+- **Last Updated**: May 2021
+- **Description**: Python CLI to track Kijiji search URLs and send email alerts for new listings (popular in Canada)
 - [ ] Review functionality
 - [ ] Test reliability
 - [ ] Check code quality
