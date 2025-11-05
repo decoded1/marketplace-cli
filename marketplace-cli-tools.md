@@ -15,6 +15,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### clscrape
 - **URL**: https://github.com/jseconners/clscrape
+- **Last Updated**: December 2022
 - **Description**: Command line Craigslist scraper outputs JSON with structured listing data
 - [ ] Review functionality
 - [ ] Test reliability
@@ -24,6 +25,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### CraigslistScraper
 - **URL**: https://github.com/ryanirl/CraigslistScraper
+- **Last Updated**: June 2024
 - **Description**: Lightweight Python library for scraping Craigslist from terminal sessions
 - [ ] Review functionality
 - [ ] Test reliability
@@ -33,6 +35,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### SearchExpander
 - **URL**: https://github.com/Same-Writer/SearchExpander
+- **Last Updated**: July 2021
 - **Description**: Scrapes Craigslist across multiple cities with email notifications support
 - [ ] Review functionality
 - [ ] Test reliability
@@ -42,6 +45,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### craigslist_scraper
 - **URL**: https://github.com/ebtrader/craigslist_scraper
+- **Last Updated**: April 2020
 - **Description**: Scrapes Craigslist pages and ranks most common listings found
 - [ ] Review functionality
 - [ ] Test reliability
@@ -51,6 +55,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### craigslist-scraper
 - **URL**: https://github.com/tylernnguyen5/craigslist-scraper
+- **Last Updated**: July 2020
 - **Description**: Extracts job listings from Craigslist using Puppeteer and Cheerio
 - [ ] Review functionality
 - [ ] Test reliability
@@ -60,6 +65,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### cl_gig
 - **URL**: https://github.com/michaelrinderle/cl_gig
+- **Last Updated**: April 2016
 - **Description**: Scrapes Craigslist computer gigs and outputs to HTML file
 - [ ] Review functionality
 - [ ] Test reliability
@@ -73,6 +79,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Apify OfferUp Scraper
 - **URL**: https://apify.com/igolaizola/offerup-scraper
+- **Last Updated**: N/A (Apify platform)
 - **Description**: Extract OfferUp listings by keyword and ZIP code via CLI
 - [ ] Review functionality
 - [ ] Test reliability
@@ -82,6 +89,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### offerup
 - **URL**: https://github.com/planetzero/offerup
+- **Last Updated**: December 2017
 - **Description**: Unofficial OfferUp API client for programmatic marketplace access
 - [ ] Review functionality
 - [ ] Test reliability
@@ -91,6 +99,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### OfferupUnofficalAPI
 - **URL**: https://github.com/everettperiman/OfferupUnofficalAPI
+- **Last Updated**: February 2021
 - **Description**: Unofficial API for OfferUp ecommerce site marketplace operations
 - [ ] Review functionality
 - [ ] Test reliability
@@ -104,6 +113,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Apify FB Marketplace Scraper
 - **URL**: https://apify.com/apify/facebook-marketplace-scraper
+- **Last Updated**: N/A (Apify platform)
 - **Description**: Extract Facebook Marketplace products with prices and seller details
 - [ ] Review functionality
 - [ ] Test reliability
@@ -113,6 +123,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### facebook-marketplace-scraper
 - **URL**: https://github.com/passivebot/facebook-marketplace-scraper
+- **Last Updated**: April 2024
 - **Description**: Scrapes Facebook Marketplace using Playwright BeautifulSoup and Streamlit
 - [ ] Review functionality
 - [ ] Test reliability
@@ -122,6 +133,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Apify FB Marketplace Cheerio
 - **URL**: https://apify.com/memo23/facebook-marketplace-cheerio
+- **Last Updated**: N/A (Apify platform)
 - **Description**: Fast Facebook Marketplace scraper using Cheerio for data extraction
 - [ ] Review functionality
 - [ ] Test reliability
@@ -135,6 +147,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Apify eBay Listings Scraper
 - **URL**: https://apify.com/piotrv1001/ebay-listings-scraper
+- **Last Updated**: N/A (Apify platform)
 - **Description**: eBay listings scraper installable via npm apify-cli command line
 - [ ] Review functionality
 - [ ] Test reliability
@@ -144,6 +157,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Apify eBay Scraper (Rental)
 - **URL**: https://apify.com/3x1t/ebay-scraper
+- **Last Updated**: N/A (Apify platform)
 - **Description**: Scrapes eBay product listings with rental options via CLI
 - [ ] Review functionality
 - [ ] Test reliability
@@ -153,6 +167,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Apify eBay Search Scraper
 - **URL**: https://apify.com/jwlben11/my-ebay-scraper
+- **Last Updated**: N/A (Apify platform)
 - **Description**: Scrapes eBay search results pages through Apify CLI interface
 - [ ] Review functionality
 - [ ] Test reliability
@@ -162,6 +177,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Apify eBay Products Scraper
 - **URL**: https://apify.com/xmiso_scrapers/ebay-products-easy-scraper
+- **Last Updated**: N/A (Apify platform)
 - **Description**: Fast lightweight eBay scraper processing two thousand products per minute
 - [ ] Review functionality
 - [ ] Test reliability
@@ -171,6 +187,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Apify eBay Seller Scraper
 - **URL**: https://apify.com/lucascode/ebay-seller-scraper
+- **Last Updated**: N/A (Apify platform)
 - **Description**: Extracts eBay seller information and listings through API calls
 - [ ] Review functionality
 - [ ] Test reliability
@@ -184,6 +201,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Getsy (WWW::Getsy)
 - **URL**: https://github.com/jgoulah/WWW-Getsy
+- **Last Updated**: November 2015
 - **Description**: Perl command line interface to Etsy V2 OAuth API
 - [ ] Review functionality
 - [ ] Test reliability
@@ -197,6 +215,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Deals-Scraper
 - **URL**: https://github.com/JustSxm/Deals-Scraper
+- **Last Updated**: April 2024
 - **Description**: Scrapes Facebook Marketplace Kijiji eBay Amazon and Lespacs deals
 - [ ] Review functionality
 - [ ] Test reliability
@@ -206,6 +225,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### marketplace-scraper
 - **URL**: https://github.com/johudsonRx/marketplace-scraper
+- **Last Updated**: December 2019
 - **Description**: Scrapes Craigslist and other marketplaces for targeted buying opportunities
 - [ ] Review functionality
 - [ ] Test reliability
@@ -219,6 +239,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### ZenRows
 - **URL**: https://www.zenrows.com/blog/ebay-web-scraping
+- **Last Updated**: N/A (Commercial API Service)
 - **Description**: Python terminal based API for eBay scraping with rotation
 - [ ] Review functionality
 - [ ] Test reliability
@@ -228,6 +249,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Crawlbase Crawling API
 - **URL**: https://crawlbase.com/blog/how-to-scrape-ebay-using-javascript/
+- **Last Updated**: N/A (Commercial API Service)
 - **Description**: Crawling API with built-in eBay scraper for search results
 - [ ] Review functionality
 - [ ] Test reliability
@@ -237,6 +259,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### ScraperAPI
 - **URL**: https://www.scraperapi.com/web-scraping/ebay/
+- **Last Updated**: N/A (Commercial API Service)
 - **Description**: Supports Python and JavaScript implementations for eBay marketplace scraping
 - [ ] Review functionality
 - [ ] Test reliability
@@ -246,6 +269,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### ScrapingAnt
 - **URL**: https://scrapingant.com/blog/scrape-ebay-python
+- **Last Updated**: N/A (Commercial API Service)
 - **Description**: Python API for eBay scraping accessible through terminal
 - [ ] Review functionality
 - [ ] Test reliability
@@ -255,6 +279,7 @@ A comprehensive checklist for evaluating and organizing marketplace scraping/que
 
 ### Bright Data FB Scraper
 - **URL**: https://brightdata.com/products/web-scraper/facebook/marketplace
+- **Last Updated**: N/A (Commercial API Service)
 - **Description**: Facebook Marketplace scraper API for automated data extraction
 - [ ] Review functionality
 - [ ] Test reliability
