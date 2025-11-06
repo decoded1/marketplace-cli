@@ -1,77 +1,388 @@
 # Marketplace CLI - Continuation Plan
 
-**Date**: November 5, 2025
+**Date**: November 5, 2025 (Updated)
 **Location**: Pine Hill, NJ 08021
-**Status**: Testing complete, investigating workarounds before building unified CLI
+**Status**: Facebook lane resolved, designing AI-collaborative architecture
+
+---
+
+## 🎯 PROJECT VISION: AI-COLLABORATIVE MARKETPLACE AGGREGATOR
+
+### Core Concept
+Build an all-encompassing marketplace CLI tool designed for **AI-to-human collaboration**, where:
+- **User provides natural language queries** → **AI translates to CLI parameters**
+- **AI pulls levers (CLI flags/options)** → **CLI code captures data and creates CSV/JSON files**
+- **Standardized data format** across all platforms (OfferUp, Craigslist, Facebook)
+- **Two-tier scraping strategy**: Fast search overview → Detailed on-demand scraping
+- **Human reviews filtered results** manually or via LLM analysis
+- **URLs tracked** for all captures to enable follow-up
+
+**Key Distinction**: AI is the **controller** (interprets natural language, sets parameters, executes commands), not the **processor** (the CLI tool does data capture, parsing, and file generation)
+
+### User's Vision Quote
+*"I want to build this all-encompassing tool to make it easy for AI's like yourself specifically to be able to use it in collaborative way where I give you the details on what I need to search for and where I need to search for it specifically what town whatever with the item I'm looking for is and then you are to go on the hunt or capture large swaths of data and neatly organized them into a CSV file or a Json file that way, I can review the listings either manually or feed them into a suitable model that is able to read large amounts of data and burn lots of tokens, but still be able to pick out listings that would be suitable."*
 
 ---
 
 ## Current Situation
 
-We've tested all 5 marketplace scraping tools. Results:
-- ✅ **pyOfferUp**: Working perfectly (43 results)
-- ⚠️ **CraigslistScraper**: Working but limited (1 result)
-- ❌ **facebook-marketplace-scraper**: Blocked by Facebook
-- ❌ **Deals-Scraper**: eBay module broken
-- ⏸️ **PyCraigslist**: Requires Docker/FlareSolverr
+**Lane Status** (as of November 5, 2025):
+- ✅ **Facebook Marketplace**: RESOLVED (37 results, session persistence working)
+- ✅ **OfferUp**: WORKING (43 results via pyOfferUp)
+- ✅ **Craigslist**: Tier 1 + Tier 2 validated with filtering, drive-distance support, and origin guardrails
+- ⏸️ **PyCraigslist**: On hold (Docker requirement)
+
+### Cross-Market Feature Alignment
+
+| Capability | Craigslist | Facebook Marketplace | OfferUp | Notes |
+|------------|------------|----------------------|---------|-------|
+| Tier 1 search (titles/prices/URLs) | ✅ | ✅ | ✅ | Facebook via Playwright; OfferUp via pyOfferUp client |
+| Tier 2 detail capture (description, images, seller info) | ✅ | ⚠️ (first listing proven; automation pending) | ⬜ | Facebook detail scrape works but still manual for multi-item pass |
+| Drive-distance & duration (OpenRouteService) | ✅ | ⬜ | ⬜ | Craigslist detail pages expose map coords; other lanes not yet wired |
+| Straight-line distance fallback | ✅ | ⬜ | ⬜ | Craigslist tier 1 geodesic estimate implemented |
+| Location radius / ZIP targeting | ✅ (postal + `search_distance`) | ✅ (`radius`, lat/lon) | ✅ (`pickup_distance`) | All three platforms support radius once adapter wiring is complete |
+| Price filtering | ✅ | ⚠️ (UI supports filters; automation TBD) | ⚠️ (pyOfferUp supports max price; needs CLI hook) | |
+| Noise filtering (buyer/repair/accessory suppression) | ✅ | ⬜ | ⬜ | Craigslist tier 1 filters applied; others still raw |
+| Session / login management | N/A (public access) | ✅ (storage state) | ⚠️ (API key/credentials optional) | OfferUp relies on API creds if user wants private data |
+| Category coverage mapping | ✅ (for-sale category table) | ⚠️ (core marketplace categories logged) | ⚠️ (pyOfferUp exposes categories) | |
+
+Legend: ✅ implemented, ⚠️ partial / manual, ⬜ not started, N/A not required.
 
 ---
 
-## USER'S PRIMARY OBJECTIVES
+## 🏗️ AI-COLLABORATIVE ARCHITECTURE REQUIREMENTS
 
-### 🎯 Priority 1: Get Facebook Marketplace Working
-**User Quote**: *"I need you to create a continuation MD file as my token usage is about to run out... my primary objective moving forward is to figure out what is the least resistant way that we can figure out how to get Facebook marketplace up and running if that requires an API key or me logging in then I'm OK with doing that."*
+### Natural Language Interface Design
+**Goal**: AI should translate user's natural language into executable search parameters
 
-**User is willing to**:
-- Provide API keys
-- Login with Facebook credentials
-- Use authenticated sessions
-- Try alternative approaches
+**Example User Input**:
+> "Find me nintendo switches under $200 in Philadelphia"
+
+**AI Translation**:
+```python
+{
+  "query": "nintendo switch",
+  "location": "Philadelphia, PA",
+  "max_price": 200,
+  "platforms": ["facebook", "offerup", "craigslist"],
+  "capture_mode": "tier1"  # or "tier2" for detailed
+}
+```
+
+**AI Capabilities Required**:
+- Location normalization (Philadelphia → philly/Newark/jerseyshore codes)
+- Price extraction from natural language ($200, under 200, etc.)
+- Query term extraction and cleaning
+- Platform selection (individual or "all")
+- Mode selection (tier1 fast scan vs tier2 detailed)
+
+---
+
+### Two-Tier Scraping Strategy
+
+#### **Tier 1: Fast Search Overview** (Primary Scraping)
+**Purpose**: "Get a lay of the land" - quick scan of available listings
+
+**Data Captured**:
+- Title
+- Price
+- Location
+- Thumbnail image URL
+- Listing URL (CRITICAL for tier 2)
+- Platform source (facebook/offerup/craigslist)
+- Timestamp of capture
+
+**Performance**:
+- Fast: 1 page load per search
+- Low detection risk
+- Suitable for bulk scanning
+
+**Use Case**: Initial discovery phase, price comparison, availability checking
+
+#### **Tier 2: Detailed Scraping** (Secondary, On-Demand)
+**Purpose**: "Get more insight on a second pass" - deep dive into specific listings
+
+**Additional Data Captured**:
+- Full description (multi-paragraph)
+- Item condition (New, Used - Like New, etc.)
+- Brand information
+- Multiple images (full gallery)
+- Seller name
+- Seller reputation/join date
+- Exact location with map
+- Related/similar items
+
+**Performance**:
+- Slower: N+1 page loads (clicks through each listing)
+- Higher detection risk
+- Suitable for shortlisted items
+
+**Use Case**: Final evaluation before purchase, comparing specific items
+
+---
+
+### Standardized Data Format (Cross-Platform)
+
+**JSON Structure** (for AI processing):
+```json
+{
+  "capture_session": {
+    "id": "uuid-here",
+    "timestamp": "2025-11-05T14:30:00Z",
+    "query": "nintendo switch",
+    "location": "Philadelphia, PA",
+    "max_price": 200,
+    "platforms": ["facebook", "offerup", "craigslist"],
+    "tier": 1,
+    "total_results": 123
+  },
+  "listings": [
+    {
+      "id": "unique-id",
+      "platform": "facebook",
+      "title": "Nintendo Switch OLED - Like New",
+      "price": 250.00,
+      "currency": "USD",
+      "location": "Philadelphia, PA",
+      "distance_miles": 5.2,
+      "url": "https://facebook.com/marketplace/item/12345",
+      "image_url": "https://...",
+      "posted_date": "2025-11-01",
+      "tier1_data": {
+        "snippet": "Brief preview text..."
+      },
+      "tier2_data": null  // Populated only if detailed scrape run
+    }
+  ]
+}
+```
+
+**CSV Format** (for human review):
+```csv
+platform,title,price,location,url,posted_date,condition,image_url
+facebook,"Nintendo Switch OLED",250,"Philadelphia, PA","https://...",2025-11-01,like_new,"https://..."
+offerup,"Switch Bundle",200,"Newark, NJ","https://...",2025-11-02,used,"https://..."
+```
+
+**Field Mapping Across Platforms**:
+| Standard Field | Facebook | OfferUp | Craigslist |
+|----------------|----------|---------|------------|
+| `title` | Listing title | Item name | Post title |
+| `price` | Price span | Price field | Price tag |
+| `location` | Seller location | Distance-based | Area name |
+| `url` | `/marketplace/item/{id}` | `/item/detail/{id}` | Post URL |
+| `condition` | Condition field | Condition tag | In description |
+| `posted_date` | Listed date | Posted time | Post date |
+
+---
+
+### CLI Command Structure for AI
+
+**Design Philosophy**: Commands should be intuitive for AI to construct from natural language
+
+**Basic Search** (Tier 1):
+```bash
+marketplace-cli search \
+  --query "nintendo switch" \
+  --location "Philadelphia, PA" \
+  --max-price 200 \
+  --platforms facebook offerup craigslist \
+  --output results.json \
+  --format json
+```
+
+**Detailed Scrape** (Tier 2):
+```bash
+marketplace-cli details \
+  --input results.json \
+  --indices 0 5 12 \
+  --output detailed.json
+```
+
+**Multi-Platform Aggregation**:
+```bash
+marketplace-cli search \
+  --query "nintendo switch" \
+  --location "Philadelphia, PA" \
+  --max-price 200 \
+  --all-platforms \
+  --output aggregated.csv \
+  --format csv
+```
+
+**Session-Based Workflow** (for large captures):
+```bash
+# Start capture session
+marketplace-cli session start "nintendo_switches_nov_2025"
+
+# Add searches to session
+marketplace-cli session add facebook "nintendo switch" --max-price 200
+marketplace-cli session add offerup "nintendo switch" --max-price 200
+marketplace-cli session add craigslist "nintendo switch" --max-price 200
+
+# Execute all searches
+marketplace-cli session run
+
+# Get detailed info for specific items
+marketplace-cli session details 1 5 12 --tier 2
+
+# Export session results
+marketplace-cli session export --format csv --output results.csv
+```
+
+---
+
+### URL Tracking and Capture Management
+
+**Session Metadata Storage**:
+```json
+{
+  "sessions": [
+    {
+      "id": "nintendo_switches_nov_2025",
+      "created": "2025-11-05T14:30:00Z",
+      "query_params": {...},
+      "results_file": "data/sessions/nintendo_switches_nov_2025.json",
+      "tier1_count": 123,
+      "tier2_count": 15,
+      "platforms": ["facebook", "offerup", "craigslist"]
+    }
+  ]
+}
+```
+
+**URL Tracking Benefits**:
+1. **Reproducibility**: Re-visit exact listings later
+2. **Tier 2 Activation**: Click through URLs for detailed scraping
+3. **Price Monitoring**: Check same URLs over time for price drops
+4. **Deduplication**: Same item across platforms (URL comparison)
+5. **LLM Context**: Provide URLs to models for visual analysis
+
+---
+
+## USER'S PRIMARY OBJECTIVES (UPDATED)
+
+### ✅ Priority 1: Facebook Marketplace - RESOLVED
+**Status**: ✅ COMPLETE
+
+**Achievements**:
+1. ✅ Session persistence working (`facebook_session.json`)
+2. ✅ Manual login supported (90-second window)
+3. ✅ Marketplace-specific search box identified
+4. ✅ 37 listings scraped successfully
+5. ✅ Tier 1 data extraction validated (title, price, location, URL)
+6. ✅ Tier 2 approach validated (click-through works for first listing)
+
+**Implementation**: [test_facebook_automated_search.py](test_scripts/test_facebook_automated_search.py)
+
+**Key Learnings**:
+- Use base Marketplace URL + search box (not direct search URLs)
+- Session persistence avoids re-login
+- Page interaction > direct URL navigation (crashes less)
+- Chromium 140+ required for macOS 26.0.1 compatibility
+
+---
+
+### 🔄 Priority 2: Test/Validate Craigslist Access
+**Status**: ✅ CORE WORKING — continuing polish / cross-platform handoff
+
+**Recent Wins**:
+- Tier 1 + Tier 2 flows validated for South Jersey/Philadelphia queries
+- Drive-time helper integrated (OpenRouteService with key rotation, geodesic fallback)
+- Tier 1 straight-line estimates + Tier 2 routed distances now recorded on every listing
+- IP-based safety check prompts when working away from the saved origin
+- Aggressive listing filters drop buyer/reseller, repair, and accessory noise automatically
+
+**Remaining Goals**:
+- Document the new distance/filter behaviour for future CLI wiring
+- Mirror the coordinate capture + drive metrics in Facebook and OfferUp detail scrapers once we shift focus
 
 **Action Items**:
-1. ✅ Investigate facebook-marketplace-scraper code in detail
-2. ✅ Check if it supports manual login/cookies
-3. ✅ Research Facebook Marketplace API options
-4. ✅ Test headful browser mode (non-headless) with manual login
-5. ✅ Explore session/cookie persistence methods
-6. ✅ Check for alternative Facebook Marketplace libraries
+- [x] Test CraigslistScraper with multiple search terms and categories (tier 1 / tier 2)
+- [x] Validate tier 1 data extraction (title, price, location, URL) with spam filtering
+- [x] Test tier 2 approach (click-through, map coordinates, drive metrics)
+- [x] Map Craigslist tier 1 + tier 2 fields to the standardized schema (distance fields included)
+- [x] Compare results and counts against manual Craigslist browsing (spot checks performed during testing)
+- [x] Document Craigslist quirks (free section, category codes, buyer/accessory filter patterns)
+- [ ] Extend coordinate capture + drive metrics to Facebook and OfferUp (tier 2) once Craigslist lane is signed off
+
+**Craigslist "For Sale" Category Reference (South Jersey Site)**  
+Purpose: give the controller a ready map of category abbreviations and endpoints so it can pivot searches dynamically without re-scraping the homepage. Each entry maps to `https://southjersey.craigslist.org/search/{category}` and accepts the same filters already supported (`postal`, `search_distance`, `min_price`, `max_price`, `condition`, etc.).
+
+`for sale` root: `/search/sss`
+
+- `antiques` `/search/ata`
+- `appliances` `/search/ppa`
+- `arts+crafts` `/search/ara`
+- `atv/utv/sno` `/search/sna`
+- `auto parts` `/search/pta`
+- `aviation` `/search/ava`
+- `baby+kid` `/search/baa`
+- `barter` `/search/bar`
+- `beauty+hlth` `/search/haa`
+- `bike parts` `/search/bip`
+- `bikes` `/search/bia`
+- `boat parts` `/search/bpa`
+- `boats` `/search/boo`
+- `books` `/search/bka`
+- `business` `/search/bfa`
+- `cars+trucks` `/search/cta`
+- `cds/dvd/vhs` `/search/ema`
+- `cell phones` `/search/moa`
+- `clothes+acc` `/search/cla`
+- `collectibles` `/search/cba`
+- `computer parts` `/search/syp`
+- `computers` `/search/sya`
+- `electronics` `/search/ela`
+- `farm+garden` `/search/gra`
+- `free` `/search/zip`
+- `furniture` `/search/fua`
+- `garage sale` `/search/gms`
+- `general` `/search/foa`
+- `heavy equip` `/search/hva`
+- `household` `/search/hsa`
+- `jewelry` `/search/jwa`
+- `materials` `/search/maa`
+- `motorcycle parts` `/search/mpa`
+- `motorcycles` `/search/mca`
+- `music instr` `/search/msa`
+- `photo+video` `/search/pha`
+- `rvs+camp` `/search/rva`
+- `sporting` `/search/sga`
+- `tickets` `/search/tia`
+- `tools` `/search/tla`
+- `toys+games` `/search/taa`
+- `trailers` `/search/tra`
+- `video gaming` `/search/vga`
+- `wanted` `/search/waa`
+- `wheels+tires` `/search/wta`
+
+Usage pattern: build URLs through the patched `build_url()` helper using `city='southjersey'`, the category code above, and any additional filters. This lets the AI decide whether to run broad sweeps (`sss`) or target sub-verticals (e.g., `zip` for free, `ela` for electronics) without extra discovery steps.
+
+**Free section nuance**: Navigating to `/search/zip` loads the dedicated “free stuff” category. The additional links (e.g., `/search/fua?free=1`) are cross-category filters showing items flagged as free within another vertical (furniture, farm+garden, etc.). Toggle these by passing `extra_params={'free': 1}` together with the target category code when calling `build_url(...)`.
+
+**Deferred**:
+- PyCraigslist Docker investigation (only if CraigslistScraper insufficient)
 
 ---
 
-### 🎯 Priority 2: Fix/Improve Craigslist Access
-**User Quote**: *"I feel like some of these tools that failed or are only working partially might be able to be fixed or there might be a workaround if we dig a little deeper into the project files."*
+### 🎯 Priority 3: Build Unified CLI Architecture
+**Status**: 🚧 READY TO BEGIN (once Craigslist validated)
 
-**Goals**:
-- Investigate why CraigslistScraper only returned 1 result
-- Determine if PyCraigslist's Docker requirement is absolute
-- Find workarounds or fixes
-
-**Action Items**:
-1. ✅ Deep dive into CraigslistScraper code
-2. ✅ Test different search terms and categories
-3. ✅ Check Craigslist site structure changes
-4. ✅ Investigate PyCraigslist Docker requirement
-   - Is FlareSolverr 100% necessary?
-   - Can we bypass Cloudflare another way?
-   - Test PyCraigslist without Docker to confirm it fails
-5. ✅ Research alternative Craigslist scraping methods
-
----
-
-### 🎯 Priority 3: Resolve "Lanes" Before Building CLI
-**User Quote**: *"The main goal is to figure out how to smooth out all the lanes in order to build the unit CLI tool and we've already resolved the OfferUp lane. And now we just need to resolve the facebook marketplace and craigslist Lane. As these are the primary sources, I need to pull data from and care about the most."*
+**User Requirement**: *"I do not want to create the unified CLI until we can iron out some of these kinks"*
 
 **Current Lane Status**:
+- ✅ **Facebook Lane**: RESOLVED (tier 1 + tier 2 working)
 - ✅ **OfferUp Lane**: RESOLVED (pyOfferUp working perfectly)
-- ⚠️ **Craigslist Lane**: PARTIALLY RESOLVED (CraigslistScraper works but limited)
-- ❌ **Facebook Lane**: NOT RESOLVED (blocked)
+- ⏳ **Craigslist Lane**: NEEDS VALIDATION (CraigslistScraper exists)
 
-**User Priority Order**:
-1. Facebook Marketplace (most important)
-2. Craigslist (second most important)
-3. OfferUp (already working)
-
-**User Statement**: *"I do not want to create the unified CLI until we can iron out some of these kinks"*
+**Design Principles for AI Collaboration**:
+1. **Natural Language Parsing**: AI extracts query, location, price from user text
+2. **Toggles/Levers**: Standardized flags AI can manipulate
+3. **Flexible Platform Selection**: Search one or all platforms
+4. **Session Management**: Track large data captures with IDs
+5. **Dual Output**: JSON (for AI analysis) + CSV (for human review)
+6. **URL Preservation**: All listings retain URLs for follow-up
 
 ---
 
@@ -98,70 +409,417 @@ We've tested all 5 marketplace scraping tools. Results:
 
 ---
 
-## Technical Investigation Roadmap
+## 🛠️ IMPLEMENTATION ROADMAP
 
-### Phase 1: Facebook Marketplace Deep Dive
+### Phase 1: Craigslist Validation ✅ COMPLETE (awaiting tier 2 script harness)
+**Goal**: Validate Craigslist lane is production-ready for tier 1 + tier 2
 
-#### A. Investigate Existing Tool
-- [ ] Read full `app.py` and `gui.py` from facebook-marketplace-scraper
-- [ ] Check if Streamlit GUI supports manual login
-- [ ] Look for cookie/session saving functionality
-- [ ] Test headful browser mode (browser visible, not headless)
-- [ ] Research Playwright's `context.storage_state()` for saving login
+**Tasks**:
+- [x] Create `test_craigslist_tier1.py` (search results only)
+- [x] Test multiple search queries (nintendo switch, iphone, bicycle)
+- [x] Test multiple categories (sss, electronics, gaming)
+- [x] Test Philadelphia + nearby areas (newjersey, southjersey)
+- [x] Validate data extraction (title, price, location, URL)
+- [ ] (Planned) Create `test_craigslist_tier2.py` to formalize tier 2 regression checks
+- [x] Extract detailed data (description, images, seller info, map coordinates)
+- [x] Map Craigslist data to standardized JSON schema (tier 1 + tier 2 + distance fields)
+- [x] Document Craigslist quirks and limitations (category map, free filters, buyer/accessory suppression)
 
-#### B. Research Facebook APIs
-- [ ] Check if Facebook Marketplace has official API
-- [ ] Research Facebook Graph API for Marketplace access
-- [ ] Look for third-party Facebook Marketplace APIs
-- [ ] Check if Facebook Business API supports Marketplace
+**Success Criteria**:
+- ✅ 10+ results for common search terms
+- ✅ Tier 1 data extraction working reliably with noise filtering
+- ✅ Tier 2 data extraction working for individual posts (manual harness currently)
+- ✅ Data maps cleanly to standardized format (including drive distance/duration fields)
 
-#### C. Alternative Approaches
-- [ ] Test with real Facebook login (headful browser)
-- [ ] Save cookies after manual login, reuse in headless mode
-- [ ] Use browser profiles with saved sessions
-- [ ] Research selenium-stealth or undetected-chromedriver alternatives
+---
 
-#### D. GitHub Research
-- [ ] Search for other Facebook Marketplace scrapers
-- [ ] Check forks of facebook-marketplace-scraper for fixes
-- [ ] Look for recent (2024-2025) Marketplace scraping tools
+### Phase 2: Unified CLI Architecture Design 🏗️
+**Goal**: Design AI-collaborative CLI with natural language interface
 
-### Phase 2: Craigslist Deep Dive
+**Core Modules**:
 
-#### A. CraigslistScraper Investigation
-- [ ] Test with different search queries
-- [ ] Try different Craigslist categories (sss, cta, apa, etc.)
-- [ ] Check if Jersey Shore site has limited listings
-- [ ] Test nearby Craigslist sites (philly, newjersey, etc.)
-- [ ] Read source code to understand parsing logic
-- [ ] Check if HTML selectors are outdated
+#### **Module 1: Natural Language Parser** (`nlp_parser.py`)
+**Purpose**: Translate user's natural language to search parameters
 
-#### B. PyCraigslist Docker Investigation
-- [ ] Test PyCraigslist without FlareSolverr to confirm necessity
-- [ ] Research what Cloudflare protection Craigslist uses
-- [ ] Check if protection varies by location/site
-- [ ] Look for FlareSolverr alternatives (cloudscraper, curl_cffi)
-- [ ] Test if issue is just cchardet or actual Cloudflare
+```python
+from dataclasses import dataclass
+from typing import Optional, List
 
-#### C. Compare Both Tools
-- [ ] Run same search on both CraigslistScraper and PyCraigslist
-- [ ] Compare results to actual Craigslist website
-- [ ] Determine which tool is more reliable
-- [ ] Document pros/cons of each approach
+@dataclass
+class SearchQuery:
+    query: str
+    location: str
+    max_price: Optional[float]
+    min_price: Optional[float]
+    platforms: List[str]  # ["facebook", "offerup", "craigslist"] or ["all"]
+    tier: int  # 1 or 2
+    radius_miles: Optional[int]
+    category: Optional[str]
 
-### Phase 3: Docker Architecture Planning
+def parse_natural_language(user_input: str) -> SearchQuery:
+    """
+    Parse natural language input into structured search parameters.
 
-#### A. Docker Setup Investigation
-- [ ] Install Docker Desktop on macOS
-- [ ] Set up FlareSolverr container
-- [ ] Test PyCraigslist with FlareSolverr
-- [ ] Document setup process for user
+    Examples:
+    - "nintendo switch under $200 in Philadelphia"
+      → SearchQuery(query="nintendo switch", location="Philadelphia, PA",
+                    max_price=200, platforms=["all"], tier=1)
 
-#### B. Hybrid Architecture Design
-- [ ] Design unified CLI that supports both Docker and non-Docker modes
-- [ ] Implement Docker detection (check if Docker daemon running)
-- [ ] Create fallback logic: PyCraigslist → CraigslistScraper
-- [ ] Plan configuration for user to enable/disable Docker features
+    - "find iphones on facebook marketplace near me under 300"
+      → SearchQuery(query="iphone", location="Philadelphia, PA",
+                    max_price=300, platforms=["facebook"], tier=1)
+
+    - "get details for listing #5 from last search"
+      → Triggers tier 2 scrape for specific listing
+    """
+    pass
+```
+
+#### **Module 2: Platform Adapters** (`adapters/`)
+**Purpose**: Standardize interface across all platforms
+
+```python
+# adapters/base.py
+from abc import ABC, abstractmethod
+from typing import List, Dict
+
+class MarketplaceAdapter(ABC):
+    @abstractmethod
+    def search_tier1(self, query: str, location: str, max_price: float) -> List[Dict]:
+        """Fast search - get overview of listings"""
+        pass
+
+    @abstractmethod
+    def search_tier2(self, listing_urls: List[str]) -> List[Dict]:
+        """Detailed search - click through to individual listings"""
+        pass
+
+    @abstractmethod
+    def normalize_data(self, raw_data: Dict) -> Dict:
+        """Convert platform-specific data to standardized format"""
+        pass
+
+# adapters/facebook.py
+class FacebookAdapter(MarketplaceAdapter):
+    def search_tier1(self, query, location, max_price):
+        # Use test_facebook_automated_search.py logic
+        pass
+
+    def search_tier2(self, listing_urls):
+        # Use test_facebook_listing_details.py logic
+        pass
+
+# adapters/offerup.py
+class OfferUpAdapter(MarketplaceAdapter):
+    def search_tier1(self, query, location, max_price):
+        # Use pyOfferUp library
+        pass
+
+# adapters/craigslist.py
+class CraigslistAdapter(MarketplaceAdapter):
+    def search_tier1(self, query, location, max_price):
+        # Use CraigslistScraper
+        pass
+```
+
+#### **Module 3: Session Manager** (`session_manager.py`)
+**Purpose**: Track capture sessions, manage data persistence
+
+```python
+import json
+import uuid
+from datetime import datetime
+from pathlib import Path
+
+class CaptureSession:
+    def __init__(self, session_id: str = None):
+        self.session_id = session_id or str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.searches = []
+        self.results = []
+        self.data_dir = Path("data/sessions") / self.session_id
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+
+    def add_search(self, platform: str, query: SearchQuery):
+        """Add search to session queue"""
+        self.searches.append({
+            "platform": platform,
+            "query": query,
+            "timestamp": datetime.now().isoformat()
+        })
+
+    def save_results(self, results: List[Dict], tier: int):
+        """Save results to session directory"""
+        output_file = self.data_dir / f"tier{tier}_results.json"
+        with open(output_file, 'w') as f:
+            json.dump(results, f, indent=2)
+
+    def export_csv(self, output_file: str):
+        """Export session results to CSV for human review"""
+        pass
+
+    def export_json(self, output_file: str):
+        """Export session results to JSON for AI processing"""
+        pass
+```
+
+#### **Module 4: Data Normalizer** (`normalizer.py`)
+**Purpose**: Standardize data format across platforms
+
+```python
+def normalize_listing(platform: str, raw_data: Dict) -> Dict:
+    """
+    Convert platform-specific listing data to standardized format.
+
+    Standardized Schema:
+    {
+        "id": "unique-id",
+        "platform": "facebook|offerup|craigslist",
+        "title": str,
+        "price": float,
+        "currency": "USD",
+        "location": str,
+        "distance_miles": float,
+        "url": str,
+        "image_url": str,
+        "posted_date": "YYYY-MM-DD",
+        "tier1_data": {...},
+        "tier2_data": {...} or null
+    }
+    """
+    pass
+```
+
+#### **Module 5: CLI Interface** (`cli.py`)
+**Purpose**: Command-line interface for AI to invoke
+
+```python
+import click
+
+@click.group()
+def cli():
+    """Marketplace CLI - AI-Collaborative Data Capture Tool"""
+    pass
+
+@cli.command()
+@click.option('--query', required=True, help='Search query')
+@click.option('--location', required=True, help='Location (e.g., Philadelphia, PA)')
+@click.option('--max-price', type=float, help='Maximum price')
+@click.option('--platforms', multiple=True, help='Platforms to search')
+@click.option('--all-platforms', is_flag=True, help='Search all platforms')
+@click.option('--output', required=True, help='Output file path')
+@click.option('--format', type=click.Choice(['json', 'csv']), default='json')
+def search(query, location, max_price, platforms, all_platforms, output, format):
+    """Execute tier 1 search across platforms"""
+    pass
+
+@cli.command()
+@click.option('--input', required=True, help='Input results file')
+@click.option('--indices', multiple=True, type=int, help='Listing indices to scrape')
+@click.option('--output', required=True, help='Output file path')
+def details(input, indices, output):
+    """Execute tier 2 detailed scrape for specific listings"""
+    pass
+
+@cli.group()
+def session():
+    """Session management commands"""
+    pass
+
+@session.command('start')
+@click.argument('session_id')
+def session_start(session_id):
+    """Start a new capture session"""
+    pass
+
+@session.command('add')
+@click.argument('platform')
+@click.argument('query')
+@click.option('--max-price', type=float)
+def session_add(platform, query, max_price):
+    """Add search to current session"""
+    pass
+
+@session.command('run')
+def session_run():
+    """Execute all searches in current session"""
+    pass
+
+@session.command('export')
+@click.option('--format', type=click.Choice(['json', 'csv']), required=True)
+@click.option('--output', required=True)
+def session_export(format, output):
+    """Export session results"""
+    pass
+```
+
+---
+
+### Phase 3: AI Collaboration Features 🤖
+
+#### **Feature 1: Natural Language Interface**
+**AI Role**: Controller that translates natural language → CLI parameters → executes commands → reads output files
+
+**AI Usage Pattern**:
+```
+User: "Find me nintendo switches under $200 in Philadelphia"
+
+AI Role as Controller:
+1. Parse user input → extract query, location, price
+2. Normalize location → "Philadelphia, PA" → philly/Newark/jerseyshore codes
+3. Construct CLI command with parameters:
+   ```bash
+   marketplace-cli search \
+     --query "nintendo switch" \
+     --location "Philadelphia, PA" \
+     --max-price 200 \
+     --all-platforms \
+     --output results_20251105_143000.json \
+     --format json
+   ```
+4. Execute command via Bash tool
+5. **CLI tool does the work**: Scrapes platforms, normalizes data, creates JSON file
+6. AI reads the generated results_20251105_143000.json file
+7. AI summarizes findings to user
+
+User: "Show me the top 5 cheapest ones"
+
+AI Role as Controller:
+1. Read results_20251105_143000.json (already generated by CLI)
+2. Sort by price ascending
+3. Display top 5 with title, price, platform, URL
+
+User: "Get more details on #2 and #4"
+
+AI Role as Controller:
+1. Identify listings #2 and #4 from results file
+2. Construct tier 2 command with specific indices:
+   ```bash
+   marketplace-cli details \
+     --input results_20251105_143000.json \
+     --indices 2 4 \
+     --output details_20251105_143100.json
+   ```
+3. Execute command via Bash tool
+4. **CLI tool does the work**: Clicks through URLs, scrapes details, creates JSON file
+5. AI reads the generated details_20251105_143100.json file
+6. AI presents condition, description, images to user
+```
+
+**Division of Labor**:
+- **AI Responsibilities**: Natural language parsing, parameter extraction, command construction, file reading, result presentation
+- **CLI Responsibilities**: Web scraping, data extraction, data normalization, CSV/JSON file generation, session persistence
+
+#### **Feature 2: Session-Based Workflow**
+**AI Role**: Controller that orchestrates multi-search sessions via CLI commands
+
+**Use Case**: Large data capture across multiple searches
+
+```
+User: "I need to do market research on gaming consoles in the Philadelphia area"
+
+AI Role as Controller:
+1. Start session (CLI creates session directory structure):
+   ```bash
+   marketplace-cli session start "gaming_consoles_philly_nov2025"
+   ```
+
+2. Queue multiple searches (CLI stores search parameters):
+   ```bash
+   marketplace-cli session add facebook "nintendo switch" --max-price 300
+   marketplace-cli session add facebook "playstation 5" --max-price 500
+   marketplace-cli session add facebook "xbox series x" --max-price 500
+   marketplace-cli session add offerup "nintendo switch" --max-price 300
+   marketplace-cli session add offerup "playstation 5" --max-price 500
+   marketplace-cli session add craigslist "nintendo switch" --max-price 300
+   ```
+
+3. Execute all searches (CLI scrapes all platforms, normalizes data):
+   ```bash
+   marketplace-cli session run
+   ```
+
+4. Export aggregated results (CLI merges data, generates CSV file):
+   ```bash
+   marketplace-cli session export --format csv --output gaming_console_market_research.csv
+   ```
+
+5. AI reads gaming_console_market_research.csv and reports summary to user
+
+Division of Labor:
+- AI: Interprets "market research" intent, constructs 6 search commands, triggers execution, reads output CSV
+- CLI: Performs 6 web scrapes, normalizes all data, aggregates across platforms, generates CSV file
+```
+
+#### **Feature 3: LLM-Based Listing Analysis**
+**AI Role**: Controller that triggers scraping, then analyzes results generated by CLI
+
+**Use Case**: AI analyzes large result sets to find best matches
+
+```
+User: "Find listings that seem like good deals - looking for Switch with games included, good condition"
+
+AI Role as Controller:
+1. Execute tier 1 search (CLI scrapes, generates results.json):
+   ```bash
+   marketplace-cli search --query "nintendo switch" --location "Philadelphia, PA" \
+     --max-price 300 --all-platforms --output results.json
+   ```
+
+2. Read results.json (generated by CLI)
+3. Identify promising listings (price < $200)
+4. Execute tier 2 scrape for promising listings (CLI clicks through, generates details.json):
+   ```bash
+   marketplace-cli details --input results.json --indices 2 5 8 12 --output details.json
+   ```
+
+5. Read details.json (generated by CLI)
+6. Analyze each listing's description + condition
+7. Present matches to user with reasoning
+
+Division of Labor:
+- AI: Natural language understanding ("good deals", "games included"), filtering logic, analysis of descriptions
+- CLI: Web scraping (tier 1 & 2), data extraction, JSON file generation
+```
+
+#### **Feature 4: Price Monitoring**
+**Use Case**: Track same search over time, alert on price drops
+
+```python
+# Future feature - not in Phase 2
+class PriceMonitor:
+    def watch_search(self, query: SearchQuery, check_interval_hours: int):
+        """
+        Re-run same search periodically, compare prices.
+        Alert user if new listings appear or prices drop.
+        """
+        pass
+```
+
+---
+
+### Phase 4: Testing and Validation ✅
+
+**Unit Tests**:
+- [ ] Test natural language parser with diverse inputs
+- [ ] Test each platform adapter independently
+- [ ] Test data normalization across platforms
+- [ ] Test session manager persistence
+- [ ] Test CLI command parsing
+
+**Integration Tests**:
+- [ ] Test full tier 1 workflow (all platforms)
+- [ ] Test full tier 2 workflow (specific listings)
+- [ ] Test session-based workflow
+- [ ] Test CSV export format
+- [ ] Test JSON export format
+
+**User Acceptance Tests**:
+- [ ] User can provide natural language query, get results
+- [ ] Results are accurate and complete
+- [ ] CSV output is readable for human review
+- [ ] JSON output is parseable by AI models
+- [ ] Session management tracks large captures correctly
 
 ---
 
@@ -384,5 +1042,71 @@ User emphasized: *"I do not want to create the unified CLI until we can iron out
 4. Test headful browser mode with manual login
 5. Research session/cookie persistence
 6. Document findings and report back to user
+
+---
+
+## 📋 QUICK REFERENCE: AI-CLI Collaboration Model
+
+### The Controller Pattern
+
+**AI is the CONTROLLER** (interprets, decides, commands):
+- ✅ Parses natural language from user
+- ✅ Extracts parameters (query, location, price, platforms)
+- ✅ Constructs CLI commands with flags/options
+- ✅ Executes commands via Bash tool
+- ✅ Reads generated output files (JSON/CSV)
+- ✅ Analyzes, filters, sorts data from files
+- ✅ Presents results to user
+
+**CLI is the PROCESSOR** (scrapes, normalizes, generates):
+- ✅ Performs web scraping (Playwright, Requests, BeautifulSoup)
+- ✅ Extracts data from HTML
+- ✅ Normalizes data across platforms
+- ✅ Creates JSON files (structured data for AI)
+- ✅ Creates CSV files (human-readable data)
+- ✅ Manages sessions and persistence
+- ✅ Handles authentication (Facebook login, etc.)
+
+### Example Workflow
+
+**User says**: "Find nintendo switches under $250 in Philadelphia"
+
+**AI does**:
+1. Extracts: query="nintendo switch", max_price=250, location="Philadelphia, PA"
+2. Constructs: `marketplace-cli search --query "nintendo switch" --max-price 250 --location "Philadelphia, PA" --all-platforms --output results.json`
+3. Executes command
+4. Waits for CLI to finish
+5. Reads results.json
+6. Tells user: "Found 47 listings: 18 from Facebook ($80-$245), 15 from OfferUp ($95-$230), 14 from Craigslist ($100-$250)"
+
+**CLI does** (when command runs):
+1. Scrapes Facebook Marketplace (tier 1)
+2. Scrapes OfferUp (tier 1)
+3. Scrapes Craigslist (tier 1)
+4. Normalizes all data to standard schema
+5. Writes results.json with 47 listings
+6. Exits with success code
+
+**The AI never touches the scraping or file creation - it only pulls levers and reads outputs.**
+
+---
+
+## 🎯 NEXT SESSION START HERE
+
+### Immediate Priority: Craigslist Validation
+1. Create test_craigslist_tier1.py
+2. Test multiple searches to validate tier 1 scraping
+3. Create test_craigslist_tier2.py
+4. Test detailed scraping to validate tier 2
+5. Document Craigslist data mapping
+
+### After Craigslist Validated: Begin CLI Architecture
+1. Set up project structure (modules: adapters/, cli.py, session_manager.py, normalizer.py)
+2. Implement Facebook adapter using test_facebook_automated_search.py
+3. Implement OfferUp adapter using pyOfferUp
+4. Implement Craigslist adapter using CraigslistScraper
+5. Implement standardized data schema
+6. Build CLI commands (search, details, session)
+7. Test AI collaboration workflow end-to-end
 
 **End of Continuation Plan**
